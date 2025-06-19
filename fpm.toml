@@ -4,16 +4,33 @@ license = "license"
 author = "LongTermPlamc"
 maintainer = "angelm@wolfram.com"
 copyright = "Copyright 2025, LongTermPlamc"
+
 [build]
 auto-executables = true
 auto-tests = true
 auto-examples = true
 module-naming = false
+
 [install]
 library = false
 test = false
+
 [fortran]
 implicit-typing = false
 implicit-external = false
 source-form = "free"
 
+[[test]]
+name = "mod_diff_test"
+source-dir= "test"
+main = "mod_diff_test.f90"
+
+[[test]]
+name = "mod_salute_test"
+source-dir= "test"
+main = "mod_salute_test.f90"
+
+[[test]]
+name = "mod_initial_test"
+source-dir= "test"
+main = "mod_initial_test.f90"
