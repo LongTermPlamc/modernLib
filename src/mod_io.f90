@@ -72,5 +72,31 @@ module mod_io
 
     end subroutine writeStock
 
+    subroutine readData(filename, time, wind_speed)
+        character(*), intent(in) :: filename
+        character(*), intent(inout),allocatable :: time(:)
+        real, intent(inout), allocatable :: wind_speed(:)
+        integer :: fileunit
+        integer :: n, nm
+        
+        !! get number of records
+        nm = num_records(filename)
+        if (allocated(time)) deallocate(time)
+        
+        !! Only time and wind_speed for now.
+        allocate(character(20)::time(nm))
+        call alloc(wind_speed, nm)
+        
+        !! Open file and read line by line. Only taking the first two elements.
+        !! By doing this, fortran discards any other element beyond the second one
+        open(newunit=fileunit, file=filename)
+        do n = 1, nm
+            read(fileunit, fmt=*, end=100) time(n), wind_speed(n)
+        end do
+        100 close(fileunit)
+        !write(*,*) "reading finished from image: ", this_image()
+
+    endsubroutine readData
+
 
 end module mod_io

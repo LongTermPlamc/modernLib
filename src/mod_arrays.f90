@@ -42,5 +42,15 @@ module mod_arrays
 
     end function reverse
 
+    pure function denan(array)
+        use ieee_arithmetic, only: ieee_is_nan
+        real, allocatable, intent(in):: array(:)
+        real, allocatable :: denan(:)
+        !! second argument of pack is an array
+        !! ieee_is_nan return True is Nan
+        denan = pack(array, .not. ieee_is_nan(array))
+
+    end function denan
+
 
 end module mod_arrays

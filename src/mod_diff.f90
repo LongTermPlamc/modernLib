@@ -14,7 +14,7 @@ module mod_diff
             dx(2:im) = x(2:im) - x(1:im-1)
         end function diff
 
-        pure function diffCentered(x) result (dx)
+        pure function diff_centered(x) result (dx)
             real(real32), intent(in):: x(:)
             real(real32) :: dx(size(x))
             integer(int32) :: im
@@ -24,7 +24,7 @@ module mod_diff
             dx(im) = x(1) - x(im-1)
             dx(2:im-1) = x(3:im) - x(1:im-2)
             dx = 0.5 * dx
-        end function diffCentered
+        end function diff_centered
 
         pure function diff2Cent(x) result (ddx)
             real(real32), intent(in):: x(:)
